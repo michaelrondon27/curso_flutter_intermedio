@@ -22,3 +22,13 @@ class HeaderCuadrado extends StatelessWidget {
     );
   }
 }
+
+class HeaderDiagonal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Color(0xff625AAB),
+      height: 300,
+    );
+  }
+}
