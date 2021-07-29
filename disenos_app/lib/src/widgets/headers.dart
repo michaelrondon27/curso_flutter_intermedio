@@ -27,8 +27,73 @@ class HeaderDiagonal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff625AAB),
-      height: 300,
+      child: CustomPaint(
+        painter: _HeaderDiagonalPainter(),
+      ),
+      height: double.infinity,
+      width: double.infinity
     );
+  }
+}
+
+class _HeaderDiagonalPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final lapiz = Paint();
+
+    lapiz.color = Color(0xff625AAB);
+    lapiz.style = PaintingStyle.fill;
+    lapiz.strokeWidth = 2;
+
+    final path = new Path();
+    
+    path.moveTo(0, size.height * 0.35);
+    path.lineTo(size.width, size.height * 0.3);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+
+    canvas.drawPath(path, lapiz);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class HeaderTriangular extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: CustomPaint(
+        painter: _HeaderTriangularPainter(),
+      ),
+      height: double.infinity,
+      width: double.infinity
+    );
+  }
+}
+
+class _HeaderTriangularPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final lapiz = Paint();
+
+    lapiz.color = Color(0xff625AAB);
+    lapiz.style = PaintingStyle.fill;
+    lapiz.strokeWidth = 2;
+
+    final path = new Path();
+    
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+
+    canvas.drawPath(path, lapiz);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
