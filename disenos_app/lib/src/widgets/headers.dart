@@ -86,8 +86,7 @@ class _HeaderTriangularPainter extends CustomPainter {
     final path = new Path();
     
     path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-    path.lineTo(0, 0);
+    path.lineTo(0, size.height);
 
     canvas.drawPath(path, lapiz);
   }
