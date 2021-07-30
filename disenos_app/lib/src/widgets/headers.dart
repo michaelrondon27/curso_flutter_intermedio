@@ -134,3 +134,40 @@ class _HeaderPicoPainter extends CustomPainter {
     return true;
   }
 }
+
+class HeaderCurvo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: CustomPaint(
+        painter: _HeaderCurvoPainter(),
+      ),
+      height: double.infinity,
+      width: double.infinity
+    );
+  }
+}
+
+class _HeaderCurvoPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final lapiz = Paint();
+
+    lapiz.color = Color(0xff625AAB);
+    lapiz.style = PaintingStyle.fill;
+    lapiz.strokeWidth = 20;
+
+    final path = new Path();
+    
+    path.lineTo(0, size.height * 0.25);
+    path.quadraticBezierTo(size.width * 0.5, size.height * 0.4, size.width, size.height * 0.25);
+    path.lineTo(size.width, 0);
+
+    canvas.drawPath(path, lapiz);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
