@@ -34,7 +34,7 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       end: 2 * Math.pi
     ).animate(
       CurvedAnimation(
-        curve: Curves.easeOut,
+        curve: Interval(0, 0.25, curve: Curves.easeOut),
         parent: controller
       )
     );
