@@ -3,10 +3,18 @@ import 'dart:math' as Math;
 import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorPrimario;
+  final double grosorSecundario;
   final porcentaje;
 
   RadialProgress({
-    required this.porcentaje 
+    this.colorPrimario = Colors.blue,
+    this.colorSecundario = Colors.grey,
+    this.grosorPrimario = 10,
+    this.grosorSecundario = 4,
+    required this.porcentaje
   });
 
   @override
@@ -48,7 +56,13 @@ class _RadialProgressState extends State<RadialProgress> with SingleTickerProvid
       builder: (BuildContext context, Widget? child) {
         return Container(
           child: CustomPaint(
-            painter: _MiRadialProgressPainter( (widget.porcentaje - diferenciaAnimar) + (diferenciaAnimar * controller.value) ),
+            painter: _MiRadialProgressPainter( 
+              widget.colorPrimario,
+              widget.colorSecundario,
+              widget.grosorPrimario,
+              widget.grosorSecundario,
+              (widget.porcentaje - diferenciaAnimar) + (diferenciaAnimar * controller.value)
+            ),
           ),
           height: double.infinity,
           padding: EdgeInsets.all( 10 ),
@@ -60,15 +74,25 @@ class _RadialProgressState extends State<RadialProgress> with SingleTickerProvid
 }
 
 class _MiRadialProgressPainter extends CustomPainter {
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorPrimario;
+  final double grosorSecundario;
   final porcentaje;
 
-  _MiRadialProgressPainter(this.porcentaje);
+  _MiRadialProgressPainter(
+    this.colorPrimario,
+    this.colorSecundario,
+    this.grosorPrimario,
+    this.grosorSecundario,
+    this.porcentaje, 
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = new Paint()
-      ..strokeWidth = 4
-      ..color = Colors.grey
+      ..strokeWidth = grosorSecundario
+      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
     Offset center = new Offset(size.width * 0.5, size.height / 2);
@@ -77,8 +101,8 @@ class _MiRadialProgressPainter extends CustomPainter {
     canvas.drawCircle(center, radio, paint);
 
     final paintArco = new Paint()
-      ..strokeWidth = 10
-      ..color = Colors.pink
+      ..strokeWidth = grosorPrimario
+      ..color = colorPrimario
       ..style = PaintingStyle.stroke;
 
     double arcAngle = 2 * Math.pi * (porcentaje / 100);
