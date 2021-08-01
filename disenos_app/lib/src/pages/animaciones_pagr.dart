@@ -31,11 +31,16 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     rotacion = Tween(
       begin: 0.0,
       end: 2 * Math.pi
-    ).animate( controller );
+    ).animate(
+      CurvedAnimation(
+        curve: Curves.easeOut,
+        parent: controller
+      )
+    );
 
     controller.addListener(() {
       if ( controller.status == AnimationStatus.completed ) {
-        controller.reverse();
+        controller.reset();
       }
     });
 
