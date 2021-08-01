@@ -19,6 +19,7 @@ class CuadradoAnimado extends StatefulWidget {
 
 class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProviderStateMixin {
   late AnimationController controller;
+  late Animation<double> agrandar;
   late Animation<double> moverDerecha;
   late Animation<double> opacidad;
   late Animation<double> rotacion;
@@ -30,20 +31,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       vsync: this
     );
 
-    rotacion = Tween(
+    agrandar = Tween(
       begin: 0.0,
-      end: 2 * Math.pi
+      end: 2.0
     ).animate(
       CurvedAnimation(
-        curve: Interval(0, 0.25, curve: Curves.easeOut),
+        curve: Curves.easeOut,
         parent: controller
       )
     );
-
-    opacidad = Tween(
-      begin: 0.1,
-      end: 1.0
-    ).animate( controller );
 
     moverDerecha = Tween(
       begin: 0.0,
@@ -55,9 +51,24 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       )
     );
 
+    opacidad = Tween(
+      begin: 0.1,
+      end: 1.0
+    ).animate( controller );
+
+    rotacion = Tween(
+      begin: 0.0,
+      end: 2 * Math.pi
+    ).animate(
+      CurvedAnimation(
+        curve: Interval(0, 0.25, curve: Curves.easeOut),
+        parent: controller
+      )
+    );
+
     controller.addListener(() {
       if ( controller.status == AnimationStatus.completed ) {
-        controller.reset();
+        controller.repeat();
       }
     });
 
@@ -82,7 +93,10 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
           child: Transform.rotate(
             angle: rotacion.value,
             child: Opacity(
-              child: childRectangulo,
+              child: Transform.scale(
+                child: childRectangulo,
+                scale: agrandar.value,
+              ),
               opacity: opacidad.value
             )
           ),
