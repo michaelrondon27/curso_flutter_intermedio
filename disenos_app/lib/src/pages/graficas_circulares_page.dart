@@ -13,18 +13,39 @@ class _GraficasCircularesPAgeState extends State<GraficasCircularesPAge> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          child: RadialProgress(
-            colorPrimario: Colors.purple,
-            colorSecundario: Colors.grey,
-            grosorPrimario: 2,
-            grosorSecundario: 1,
-            porcentaje: porcentaje
+      body: Column(
+        children: [
+          Row(
+            children: [
+              CustomRadialProgress(
+                color: Colors.blue,
+                porcentaje: porcentaje
+              ),
+              
+              CustomRadialProgress(
+                color: Colors.red,
+                porcentaje: porcentaje
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceAround
           ),
-          height: 300,
-          width: 300,
-        )
+
+          Row(
+            children: [
+              CustomRadialProgress(
+                color: Colors.pink,
+                porcentaje: porcentaje
+              ),
+              
+              CustomRadialProgress(
+                color: Colors.purple,
+                porcentaje: porcentaje
+              )
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceAround
+          )
+        ],
+        mainAxisAlignment: MainAxisAlignment.center,
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon( Icons.refresh ),
@@ -38,6 +59,31 @@ class _GraficasCircularesPAgeState extends State<GraficasCircularesPAge> {
           });
         }
       ),
+    );
+  }
+}
+
+class CustomRadialProgress extends StatelessWidget {
+  final Color color;
+  final double porcentaje;
+
+  const CustomRadialProgress({
+    required this.color,
+    required this.porcentaje
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: RadialProgress(
+        colorPrimario: color,
+        colorSecundario: Colors.grey,
+        grosorPrimario: 2,
+        grosorSecundario: 1,
+        porcentaje: porcentaje
+      ),
+      height: 180,
+      width: 180,
     );
   }
 }
