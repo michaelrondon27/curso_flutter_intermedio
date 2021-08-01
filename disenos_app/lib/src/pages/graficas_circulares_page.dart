@@ -15,8 +15,7 @@ class _GraficasCircularesPAgeState extends State<GraficasCircularesPAge> {
     return Scaffold(
       body: Center(
         child: Container(
-          child: RadialProgress( porcentaje: 40.0 ),
-          color: Colors.red,
+          child: RadialProgress( porcentaje: porcentaje ),
           height: 300,
           width: 300,
         )
