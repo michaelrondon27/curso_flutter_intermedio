@@ -19,6 +19,7 @@ class CuadradoAnimado extends StatefulWidget {
 
 class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProviderStateMixin {
   late AnimationController controller;
+  late Animation<double> moverDerecha;
   late Animation<double> opacidad;
   late Animation<double> rotacion;
 
@@ -44,6 +45,16 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
       end: 1.0
     ).animate( controller );
 
+    moverDerecha = Tween(
+      begin: 0.0,
+      end: 200.0
+    ).animate(
+      CurvedAnimation(
+        curve: Curves.easeOut,
+        parent: controller
+      )
+    );
+
     controller.addListener(() {
       if ( controller.status == AnimationStatus.completed ) {
         controller.reset();
@@ -67,12 +78,15 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado> with SingleTickerProv
     return AnimatedBuilder(
       animation: controller,
       builder: (BuildContext context, Widget? childRectangulo) {
-        return Transform.rotate(
-          angle: rotacion.value,
-          child: Opacity(
-            child: childRectangulo,
-            opacity: opacidad.value
-          )
+        return Transform.translate(
+          child: Transform.rotate(
+            angle: rotacion.value,
+            child: Opacity(
+              child: childRectangulo,
+              opacity: opacidad.value
+            )
+          ),
+          offset: Offset(moverDerecha.value, 0),
         );
       },
       child: _Rectangulo(),
