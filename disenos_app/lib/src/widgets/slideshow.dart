@@ -190,32 +190,24 @@ class _SlidershowModel with ChangeNotifier {
 
   set bulletPrimario( double value ) {
     this._bulletPrimario = value;
-
-    notifyListeners();
   }
 
   double get bulletSecundario => this._bulletSecundario;
 
   set bulletSecundario( double value ) {
     this._bulletSecundario = value;
-
-    notifyListeners();
   }
 
   Color get colorPrimario => this._colorPrimario;
 
   set colorPrimario( Color value ) {
     this._colorPrimario = value;
-
-    notifyListeners();
   }
 
   Color get colorSecundario => this._colorSecundario;
 
   set colorSecundario( Color value ) {
     this._colorSecundario = value;
-
-    notifyListeners();
   }
 
   double get currentPage => this._currentPage;
