@@ -20,7 +20,7 @@ class Slideshow extends StatelessWidget {
               child: _Slides( this.slides )
             ),
   
-            _Dots()
+            _Dots( this.slides.length )
           ]
         )
       ),
@@ -30,17 +30,15 @@ class Slideshow extends StatelessWidget {
 }
 
 class _Dots extends StatelessWidget {
+  final int totalSlides;
+
+  _Dots( this.totalSlides );
+  
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-        children: [
-          _Dot( 0 ),
-          
-          _Dot( 1 ),
-
-          _Dot( 2 ),
-        ],
+        children: List.generate( this.totalSlides, ( i ) => _Dot( i ) ),
         mainAxisAlignment: MainAxisAlignment.center
       ),
       height: 70,
@@ -113,7 +111,7 @@ class __SlidesState extends State<_Slides> {
 class _Slide extends StatelessWidget {
   final Widget slide;
 
-  const _Slide( this.slide );
+  _Slide( this.slide );
 
   @override
   Widget build(BuildContext context) {
