@@ -8,7 +8,7 @@ class SlideshowPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Slideshow(
-        // colorPrimario: Colors.red,
+        colorPrimario: Color(0xffFF5A7E),
         // colorSecundario: Colors.purple,
         // puntosArriba: true,
         slides: [
