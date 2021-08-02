@@ -7,20 +7,37 @@ class SlideshowPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Slideshow(
-        bulletPrimario: 18.0,
-        bulletSecundario: 12.0,
-        colorPrimario: Color(0xffFF5A7E),
-        // colorSecundario: Colors.purple,
-        // puntosArriba: true,
-        slides: [
-          SvgPicture.asset('assets/svgs/slide-1.svg'),
-          SvgPicture.asset('assets/svgs/slide-2.svg'),
-          SvgPicture.asset('assets/svgs/slide-3.svg'),
-          SvgPicture.asset('assets/svgs/slide-4.svg'),
-          SvgPicture.asset('assets/svgs/slide-5.svg')
+      body: Column(
+        children: [
+          Expanded(
+            child: miSlideshow()
+          ),
+
+          Expanded(
+            child: miSlideshow()
+          )
         ],
       )
+    );
+  }
+}
+
+class miSlideshow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Slideshow(
+      bulletPrimario: 18.0,
+      bulletSecundario: 12.0,
+      colorPrimario: Color(0xffFF5A7E),
+      // colorSecundario: Colors.purple,
+      // puntosArriba: true,
+      slides: [
+        SvgPicture.asset('assets/svgs/slide-1.svg'),
+        SvgPicture.asset('assets/svgs/slide-2.svg'),
+        SvgPicture.asset('assets/svgs/slide-3.svg'),
+        SvgPicture.asset('assets/svgs/slide-4.svg'),
+        SvgPicture.asset('assets/svgs/slide-5.svg')
+      ],
     );
   }
 }
