@@ -271,17 +271,34 @@ class _HeaderWaveGradientPainter extends CustomPainter {
 }
 
 class IconHeader extends StatelessWidget {
-  final Color colorBlanco = Colors.white.withOpacity( 0.7 );
+  final Color color1;
+  final Color color2;
+  final IconData icon;
+  final String subtitulo;
+  final String titulo;
+
+  IconHeader({
+    this.color1: Colors.grey, 
+    this.color2: Colors.blueGrey, 
+    required this.icon, 
+    required this.subtitulo, 
+    required this.titulo
+  });
 
   @override
   Widget build(BuildContext context) {
+    final Color colorBlanco = Colors.white.withOpacity( 0.7 );
+    
     return Stack(
       children: [
-        _IconHeaderBackground(),
+        _IconHeaderBackground(
+          color1: this.color1,
+          color2: this.color2
+        ),
 
         Positioned(
           child: FaIcon(
-            FontAwesomeIcons.plus,
+            this.icon,
             color: Colors.white.withOpacity( 0.2 ),
             size: 250
           ),
@@ -294,20 +311,20 @@ class IconHeader extends StatelessWidget {
             SizedBox( height: 80, width: double.infinity ),
 
             Text(
-              'Haz Solicitado',
+              this.subtitulo,
               style: TextStyle( color: colorBlanco, fontSize: 20 ),
             ),
 
             SizedBox( height: 20 ),
           
             Text(
-              'Asistencia Médica',
+              this.titulo,
               style: TextStyle( color: colorBlanco, fontSize: 25, fontWeight: FontWeight.bold ),
             ),
 
             SizedBox( height: 20 ),
 
-            FaIcon( FontAwesomeIcons.plus, color: Colors.white, size: 80 ),
+            FaIcon( this.icon, color: Colors.white, size: 80 ),
           ],
         )
       ]
@@ -316,6 +333,14 @@ class IconHeader extends StatelessWidget {
 }
 
 class _IconHeaderBackground extends StatelessWidget {
+  final Color color1;
+  final Color color2;
+
+  _IconHeaderBackground({
+    required this.color1,
+    required this.color2
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -324,8 +349,8 @@ class _IconHeaderBackground extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           colors: <Color> [
-            Color(0xff526BF6),
-            Color(0xff67ACF2)
+            this.color1,
+            this.color2
           ],
           end: Alignment.bottomCenter
         )
