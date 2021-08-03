@@ -18,12 +18,7 @@ class PinterestMenu extends StatelessWidget {
 
   final Color inactiveColor;
 
-  final List<PinterestButton> items = [
-    PinterestButton(icon: Icons.pie_chart, onPressed: () {}),
-    PinterestButton(icon: Icons.search, onPressed: () {}),
-    PinterestButton(icon: Icons.notifications, onPressed: () {}),
-    PinterestButton(icon: Icons.supervised_user_circle, onPressed: () {})
-  ];
+  final List<PinterestButton> items;
 
   final bool mostrar;
 
@@ -31,6 +26,7 @@ class PinterestMenu extends StatelessWidget {
     this.activeColor: Colors.black, 
     this.backgroundColor: Colors.white, 
     this.inactiveColor: Colors.blueGrey,
+    required this.items,
     this.mostrar: true,
   });
 
