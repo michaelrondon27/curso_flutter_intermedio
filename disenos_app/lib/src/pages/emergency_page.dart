@@ -50,26 +50,42 @@ class EmergencyPage extends StatelessWidget {
 
                 ...itemMap
               ],
+              physics: BouncingScrollPhysics()
             ),
             margin: EdgeInsets.only( top: 200)
           ),
 
-          PageHeader(),
+          _Encabezado(),
         ]
       )
     );
   }
 }
 
-class PageHeader extends StatelessWidget {
+class _Encabezado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return IconHeader(
-      color1: Color(0xff526BF6),
-      color2: Color(0xff67ACF2),
-      icon: FontAwesomeIcons.plus,
-      subtitulo: 'Haz Solicitado',
-      titulo: 'Asistencia Médica'
+    return Stack(
+      children: [
+        IconHeader(
+          color1: Color(0xff526BF6),
+          color2: Color(0xff67ACF2),
+          icon: FontAwesomeIcons.plus,
+          subtitulo: 'Haz Solicitado',
+          titulo: 'Asistencia Médica'
+        ),
+
+        Positioned(
+          child: RawMaterialButton(
+            child: FaIcon( FontAwesomeIcons.ellipsisV, color: Colors.white ),
+            onPressed: () {},
+            padding: EdgeInsets.all( 15 ),
+            shape: CircleBorder()
+          ),
+          right: 0,
+          top: 45
+        )
+      ],
     );
   }
 }
