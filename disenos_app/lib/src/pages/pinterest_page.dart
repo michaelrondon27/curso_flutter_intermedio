@@ -5,9 +5,32 @@ import 'package:disenos_app/src/widgets/pinterest_menu.dart';
 
 class PinterestPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return Scaffold(
-      body: PinterestMenu()
+      body: Stack(
+        children: [
+          PinterestGrid(),
+
+          _PinterestMenuLocation()
+        ],
+      )
+    );
+  }
+}
+
+class _PinterestMenuLocation extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final widthPantalla = MediaQuery.of(context).size.width;
+    
+    return Positioned(
+      bottom: 30,
+      child: Container(
+        child: Align(
+          child: PinterestMenu()
+        ),
+        width: widthPantalla
+      )
     );
   }
 }
