@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 class PinterestButton {
   final IconData icon;
-  final onPressed;
+  final Function() onPressed;
 
   PinterestButton({
     required this.icon,
