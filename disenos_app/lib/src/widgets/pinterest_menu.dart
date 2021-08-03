@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PinterestButton {
   final IconData icon;
-  final Function onPressed;
+  final onPressed;
 
   PinterestButton({
     required this.icon,
@@ -21,22 +21,35 @@ class PinterestMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: _MenuItems( items ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all( Radius.circular( 100 ) ),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10,
-              color: Colors.black38,
-              spreadRadius: -5
-            )
-          ],
-          color: Colors.white
-        ),
-        height: 60,
-        width: 250
+      child: _PinterestMenuBackground( 
+        child: _MenuItems( items )
       ),
+    );
+  }
+}
+
+class _PinterestMenuBackground extends StatelessWidget {
+  final Widget child;
+
+  _PinterestMenuBackground({ required this.child });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: child,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all( Radius.circular( 100 ) ),
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10,
+            color: Colors.black38,
+            spreadRadius: -5
+          )
+        ],
+        color: Colors.white
+      ),
+      height: 60,
+      width: 250
     );
   }
 }
@@ -63,8 +76,12 @@ class _PinteresMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Icon( item.icon ),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        child: Icon( item.icon, size: 25, color: Colors.blueGrey ),
+      ),
+      onTap: item.onPressed,
     );
   }
 }
