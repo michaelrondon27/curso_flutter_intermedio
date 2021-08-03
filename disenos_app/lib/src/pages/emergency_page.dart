@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -32,12 +33,15 @@ class EmergencyPage extends StatelessWidget {
       new ItemBoton( FontAwesomeIcons.biking, 'Awards', Color(0xff317183), Color(0xff46997D) ),
     ];
 
-    List<Widget> itemMap = items.map( (item) => BotonGordo(
-      color1: item.color1,
-      color2: item.color2,
-      icon: item.icon,
-      onPress: () {},
-      texto: item.texto
+    List<Widget> itemMap = items.map( (item) => FadeInLeft(
+      child: BotonGordo(
+        color1: item.color1,
+        color2: item.color2,
+        icon: item.icon,
+        onPress: () {},
+        texto: item.texto
+      ),
+      duration: Duration( milliseconds: 250 ),
     )).toList();
 
     return Scaffold(
