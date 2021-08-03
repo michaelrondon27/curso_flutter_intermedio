@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 
 import 'package:disenos_app/src/widgets/pinterest_menu.dart';
 
 class PinterestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {    
-    return Scaffold(
-      body: Stack(
-        children: [
-          PinterestGrid(),
-
-          _PinterestMenuLocation()
-        ],
-      )
+    return ChangeNotifierProvider(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            PinterestGrid(),
+    
+            _PinterestMenuLocation()
+          ],
+        )
+      ),
+      create: ( _ ) => _MenuModel(),
     );
   }
 }
@@ -23,11 +27,13 @@ class _PinterestMenuLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     final widthPantalla = MediaQuery.of(context).size.width;
 
+    final mostrar = Provider.of<_MenuModel>(context).mostrar;
+
     return Positioned(
       bottom: 30,
       child: Container(
         child: Align(
-          child: PinterestMenu()
+          child: PinterestMenu( mostrar: mostrar )
         ),
         width: widthPantalla
       )
@@ -51,9 +57,9 @@ class _PinterestGridState extends State<PinterestGrid> {
   void initState() {
     controller.addListener(() {
       if ( controller.offset > scrollAnterior ) {
-
+        Provider.of<_MenuModel>(context, listen: false).mostrar = false;
       } else {
-
+        Provider.of<_MenuModel>(context, listen: false).mostrar = true;
       }
 
       scrollAnterior = controller.offset;
@@ -106,5 +112,17 @@ class _PinterestItem extends StatelessWidget {
       ),
       margin: EdgeInsets.all( 5 ),
     );
+  }
+}
+
+class _MenuModel with ChangeNotifier {
+  bool _mostrar = true;
+
+  bool get mostrar => this._mostrar;
+
+  set mostrar( bool value ) {
+    this._mostrar = value;
+
+    notifyListeners();
   }
 }

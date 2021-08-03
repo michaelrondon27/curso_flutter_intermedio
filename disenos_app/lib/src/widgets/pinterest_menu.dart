@@ -18,12 +18,21 @@ class PinterestMenu extends StatelessWidget {
     PinterestButton(icon: Icons.notifications, onPressed: () {}),
     PinterestButton(icon: Icons.supervised_user_circle, onPressed: () {})
   ];
+  final bool mostrar;
+
+  PinterestMenu({
+    this.mostrar: true
+  });
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      child: _PinterestMenuBackground( 
-        child: _MenuItems( items )
+      child: AnimatedOpacity(
+        child: _PinterestMenuBackground( 
+          child: _MenuItems( items )
+        ),
+        duration: Duration( milliseconds: 250 ),
+        opacity: ( mostrar ) ? 1 : 0,
       ),
       create: ( _ ) => _MenuModel(),
     );
