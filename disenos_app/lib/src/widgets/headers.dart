@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HeaderBorderRedondeados extends StatelessWidget {
   @override
@@ -270,6 +271,51 @@ class _HeaderWaveGradientPainter extends CustomPainter {
 }
 
 class IconHeader extends StatelessWidget {
+  final Color colorBlanco = Colors.white.withOpacity( 0.7 );
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        _IconHeaderBackground(),
+
+        Positioned(
+          child: FaIcon(
+            FontAwesomeIcons.plus,
+            color: Colors.white.withOpacity( 0.2 ),
+            size: 250
+          ),
+          left: -70,
+          top: -50
+        ),
+
+        Column(
+          children: [
+            SizedBox( height: 80, width: double.infinity ),
+
+            Text(
+              'Haz Solicitado',
+              style: TextStyle( color: colorBlanco, fontSize: 20 ),
+            ),
+
+            SizedBox( height: 20 ),
+          
+            Text(
+              'Asistencia Médica',
+              style: TextStyle( color: colorBlanco, fontSize: 25, fontWeight: FontWeight.bold ),
+            ),
+
+            SizedBox( height: 20 ),
+
+            FaIcon( FontAwesomeIcons.plus, color: Colors.white, size: 80 ),
+          ],
+        )
+      ]
+    );
+  }
+}
+
+class _IconHeaderBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
