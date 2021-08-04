@@ -1,15 +1,50 @@
 import 'package:flutter/material.dart';
 
 class ThemeChanger with ChangeNotifier {
+  late ThemeData _currentTheme;
   bool _customTheme = false;
   bool _darkTheme = false;
 
+  ThemeData get currentTheme => this._currentTheme;
   bool get customTheme => this._customTheme;
   bool get darkTheme => this._darkTheme;
+
+  ThemeChanger( int theme ) {
+    switch ( theme ) {
+      case 1:
+        this._darkTheme = false;
+        this._customTheme = false;
+        this._currentTheme = ThemeData.light();
+        break;
+
+      case 2:
+        this._darkTheme = true;
+        this._customTheme = false;
+        this._currentTheme = ThemeData.dark();
+        break;
+
+      case 3:
+        this._darkTheme = false;
+        this._customTheme = true;
+        break;
+
+      default:
+        this._darkTheme = false;
+        this._customTheme = false;
+        this._currentTheme = ThemeData.light();
+        break;
+    }
+  }
 
   set customTheme( bool value ) {
     this._customTheme = value;
     this._darkTheme = false;
+
+    if ( value ) {
+      this._currentTheme = ThemeData.light();
+    } else {
+      this._currentTheme = ThemeData.light();
+    }
 
     notifyListeners();
   }
@@ -17,6 +52,12 @@ class ThemeChanger with ChangeNotifier {
   set darkTheme( bool value ) {
     this._customTheme = false;
     this._darkTheme = value;
+
+    if ( value ) {
+      this._currentTheme = ThemeData.dark();
+    } else {
+      this._currentTheme = ThemeData.light();
+    }
 
     notifyListeners();
   }
