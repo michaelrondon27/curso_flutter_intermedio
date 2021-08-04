@@ -6,9 +6,11 @@ import 'package:disenos_app/src/pages/launcher_tablet_page.dart';
 import 'package:disenos_app/src/theme/theme.dart';
  
 void main() => runApp(
-  ChangeNotifierProvider(
+  MultiProvider(
     child: MyApp(),
-    create: (_) => new ThemeChanger( 2 ),
+    providers: [
+      ChangeNotifierProvider<ThemeChanger>(create: (_) => new ThemeChanger( 2 ))
+    ]
   )
 );
  
