@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:disenos_app/src/routes/routes.dart';
+
 class LauncherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,14 @@ class _ListaOpciones extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: ( context, i ) => ListTile(
-        leading: FaIcon( FontAwesomeIcons.slideshare, color: Colors.blue ),
-        onTap: () {},
-        title: Text('Hola mundo'),
+        leading: FaIcon( pageRoutes[i].icon, color: Colors.blue ),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: ( context ) => pageRoutes[i].page));
+        },
+        title: Text(pageRoutes[i].title),
         trailing: Icon( Icons.chevron_right, color: Colors.blue ),
       ), 
-      itemCount: 20,
+      itemCount: pageRoutes.length,
       physics: BouncingScrollPhysics(),
       separatorBuilder: ( context, i ) => Divider(
         color: Colors.blue,
