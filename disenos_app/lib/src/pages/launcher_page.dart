@@ -8,8 +8,11 @@ import 'package:disenos_app/src/theme/theme.dart';
 class LauncherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
+
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: appTheme.accentColor,
         centerTitle: true,
         title: Text('Diseños en Flutter'),
       ),
