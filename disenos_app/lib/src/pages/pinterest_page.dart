@@ -26,28 +26,38 @@ class PinterestPage extends StatelessWidget {
 class _PinterestMenuLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final widthPantalla = MediaQuery.of(context).size.width;
+    double widthPantalla = MediaQuery.of(context).size.width;
 
     final mostrar = Provider.of<_MenuModel>(context).mostrar;
 
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
 
+    if ( widthPantalla > 500 ) {
+      widthPantalla -= 300;
+    }
+
     return Positioned(
       bottom: 30,
       child: Container(
-        child: Align(
-          child: PinterestMenu(
-            activeColor: appTheme.accentColor,
-            backgroundColor: appTheme.scaffoldBackgroundColor,
-            // inactiveColor: Colors.blue,
-            items: [
-              PinterestButton(icon: Icons.pie_chart, onPressed: () {}),
-              PinterestButton(icon: Icons.search, onPressed: () {}),
-              PinterestButton(icon: Icons.notifications, onPressed: () {}),
-              PinterestButton(icon: Icons.supervised_user_circle, onPressed: () {})
-            ],
-            mostrar: mostrar
-          )
+        child: Row(
+          children: [
+            Spacer(),
+
+            PinterestMenu(
+              activeColor: appTheme.accentColor,
+              backgroundColor: appTheme.scaffoldBackgroundColor,
+              // inactiveColor: Colors.blue,
+              items: [
+                PinterestButton(icon: Icons.pie_chart, onPressed: () {}),
+                PinterestButton(icon: Icons.search, onPressed: () {}),
+                PinterestButton(icon: Icons.notifications, onPressed: () {}),
+                PinterestButton(icon: Icons.supervised_user_circle, onPressed: () {})
+              ],
+              mostrar: mostrar
+            ),
+
+            Spacer()
+          ],
         ),
         width: widthPantalla
       )
@@ -91,16 +101,22 @@ class _PinterestGridState extends State<PinterestGrid> {
 
   @override
   Widget build(BuildContext context) {
+    int count = 2;
+
+    if ( MediaQuery.of(context).size.width > 500) {
+      count = 3;
+    }
+
     return StaggeredGridView.countBuilder(
       controller: controller,
-      crossAxisCount: 4,
+      crossAxisCount: count,
       crossAxisSpacing: 4.0,
       itemBuilder: ( BuildContext context, int index ) => _PinterestItem( index ),
       itemCount: items.length,
       mainAxisSpacing: 4.0,
       staggeredTileBuilder: ( int index ) => StaggeredTile.count(
-        2, 
-        index.isEven ? 2 : 3
+        1, 
+        index.isEven ? 1 : 2
       )
     );
   }
