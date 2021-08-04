@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:disenos_app/src/pages/launcher_page.dart';
+import 'package:disenos_app/src/pages/launcher_tablet_page.dart';
 import 'package:disenos_app/src/theme/theme.dart';
  
 void main() => runApp(
@@ -20,9 +21,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
-          return Container(
-            child: LauncherPage(),
-          );
+          final screenSize = MediaQuery.of(context).size;
+
+          if ( screenSize.width > 500 ) {
+            return LauncherTabletPage();
+          } else {
+            return LauncherPage();
+          }
         },
       ),
       theme: currentTheme,

@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:disenos_app/src/routes/routes.dart';
 import 'package:disenos_app/src/theme/theme.dart';
 
-class LauncherPage extends StatelessWidget {
+class LauncherTabletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = Provider.of<ThemeChanger>(context).currentTheme;
@@ -14,7 +14,7 @@ class LauncherPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: appTheme.accentColor,
         centerTitle: true,
-        title: Text('Diseños en Flutter - Teléfono'),
+        title: Text('Diseños en Flutter - Tablet'),
       ),
       body: _ListaOpciones(),
       drawer: _MenuPrincipal(),
