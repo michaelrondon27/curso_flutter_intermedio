@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 class BotonNaranja extends StatelessWidget {
+  final double alto;
+  final double ancho;
   final String texto;
 
   BotonNaranja({
+    this.alto: 50,
+    this.ancho: 150,
     required this.texto
   }); 
   
@@ -16,8 +20,8 @@ class BotonNaranja extends StatelessWidget {
         borderRadius: BorderRadius.circular( 100 ),
         color: Colors.orange,
       ),
-      height: 50,
-      width: 150,
+      height: this.alto,
+      width: this.ancho
     );
   }
 }
