@@ -8,8 +8,23 @@ class ZapatoDescPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          ZapatoSizePreview(
-            fullScreen: true
+          Stack(
+            children: [
+              ZapatoSizePreview(
+                fullScreen: true
+              ),
+
+              Positioned(
+                child: FloatingActionButton(
+                  backgroundColor: Colors.transparent,
+                  child: Icon( Icons.chevron_left, color: Colors.white, size: 60 ),
+                  elevation: 0,
+                  highlightElevation: 0,
+                  onPressed: () {},
+                ),
+                top: 80
+              )
+            ],
           ),
 
           Expanded(
@@ -23,13 +38,62 @@ class ZapatoDescPage extends StatelessWidget {
 
                   _MontoBuyNow(),
 
-                  _ColoresYmas()
+                  _ColoresYmas(),
+
+                  _BotonesLikeCartSettings()
                 ]
               )
             )
           )
         ]
       )
+    );
+  }
+}
+
+class _BotonesLikeCartSettings extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          _BotonSombreado( Icon( Icons.star, color: Colors.red, size: 25 ) ),
+          
+          _BotonSombreado( Icon( Icons.add_shopping_cart, color: Colors.grey.withOpacity( 0.4 ), size: 25 ) ),
+
+          _BotonSombreado( Icon( Icons.settings, color: Colors.grey.withOpacity( 0.4 ), size: 25 ) ),
+        ],
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      ),
+      margin: EdgeInsets.symmetric( vertical: 15 ),
+      padding: EdgeInsets.symmetric( horizontal: 30 )
+    );
+  }
+}
+
+class _BotonSombreado extends StatelessWidget {
+  final Icon icon;
+
+  _BotonSombreado( this.icon );
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: this.icon,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 20,
+            color: Colors.black12,
+            offset: Offset(0, 10),
+            spreadRadius: -5
+          )
+        ],
+        color: Colors.white,
+        shape: BoxShape.circle
+      ),
+      height: 55,
+      width: 55
     );
   }
 }
