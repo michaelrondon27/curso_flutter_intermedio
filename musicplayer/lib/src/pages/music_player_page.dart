@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -85,9 +86,12 @@ class _TituloPlay extends StatefulWidget {
   __TituloPlayState createState() => __TituloPlayState();
 }
 
-class __TituloPlayState extends State<_TituloPlay>  with SingleTickerProviderStateMixin{
+class __TituloPlayState extends State<_TituloPlay>  with SingleTickerProviderStateMixin {
+  bool firstTime = true;
   bool isPlaying = false;
   late AnimationController playAnimation;
+
+  final assetsAudioPlayer = AssetsAudioPlayer();
 
   @override
   void initState() {
@@ -104,6 +108,72 @@ class __TituloPlayState extends State<_TituloPlay>  with SingleTickerProviderSta
     this.playAnimation.dispose();
 
     super.dispose();
+  }
+
+  void open() {
+    final audioPlayerModel = Provider.of<AudioPlayerModel>(context, listen: false);
+
+    final audio = Audio("assets/Reminder.m4a", 
+      metas: Metas(
+        title:  "Reminder",
+        artist: "The Weeknd",
+        album: "Starboy",
+        image: MetasImage.asset("assets/starboy.jpg"), //can be MetasImage.network
+      ),
+    );
+
+    assetsAudioPlayer.open(
+      audio,
+      notificationSettings: NotificationSettings(
+        customPlayPauseAction: (player) {
+          this.playerControl( 'playOrPause' );
+        },
+        customStopAction: (player) {
+          this.playerControl( 'stop' );
+        }
+      ),
+      showNotification: true
+    );
+
+    assetsAudioPlayer.currentPosition.listen((duration) {
+      audioPlayerModel.current = duration;
+    });
+
+    assetsAudioPlayer.current.listen((playingAudio) {
+      audioPlayerModel.songDuration = playingAudio!.audio.duration;
+    });
+  }
+
+  void playerControl( String action ) {
+    final audioPlayerModel = Provider.of<AudioPlayerModel>(context, listen: false);
+
+    if ( this.isPlaying ) {
+      playAnimation.reverse();
+
+      this.isPlaying = false;
+
+      audioPlayerModel.controller.stop();
+
+      if ( action == 'stop' ) {
+        this.firstTime = false;
+
+        assetsAudioPlayer.stop();
+      }
+    } else {
+      playAnimation.forward();
+
+      this.isPlaying = true;
+
+      audioPlayerModel.controller.repeat();
+    }
+
+    if ( this.firstTime ) {
+      this.open();
+
+      this.firstTime = false;
+    } else {
+      assetsAudioPlayer.playOrPause();
+    }
   }
 
   @override
@@ -136,21 +206,7 @@ class __TituloPlayState extends State<_TituloPlay>  with SingleTickerProviderSta
             elevation: 0,
             highlightElevation: 0,
             onPressed: () {
-              final audioPlayerModel = Provider.of<AudioPlayerModel>(context, listen: false);
-
-              if ( this.isPlaying ) {
-                playAnimation.reverse();
-
-                this.isPlaying = false;
-
-                audioPlayerModel.controller.stop();
-              } else {
-                playAnimation.forward();
-
-                this.isPlaying = true;
-
-                audioPlayerModel.controller.repeat();
-              }
+              this.playerControl( 'playOrPause' );
             },
           )
         ]
@@ -187,11 +243,14 @@ class _BarraProgreso extends StatelessWidget {
   Widget build(BuildContext context) {
     final estilo = TextStyle( color: Colors.white.withOpacity( 0.4 ));
 
+    final audioPlayerModel = Provider.of<AudioPlayerModel>(context);
+    final porcentaje = audioPlayerModel.porcentaje;
+
     return Container(
       child: Column(
         children: [
           Text(
-            '00:00',
+            '${ audioPlayerModel.songTotalDuration }',
             style: estilo,
           ),
 
@@ -209,7 +268,7 @@ class _BarraProgreso extends StatelessWidget {
                 bottom: 0,
                 child: Container(
                   color: Color(0xffE90532),
-                  height: 100,
+                  height: 230 * porcentaje,
                   width: 3
                 ),
               )
@@ -219,7 +278,7 @@ class _BarraProgreso extends StatelessWidget {
           SizedBox( height: 10 ),
 
           Text(
-            '00:00',
+            '${ audioPlayerModel.currentSecond }',
             style: estilo,
           )
         ]
