@@ -12,7 +12,6 @@ class CustomAppBar extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Padding(
-        padding: EdgeInsets.symmetric( horizontal: 30 ),
         child: Container(
           child: Row(
             children: [
@@ -29,6 +28,7 @@ class CustomAppBar extends StatelessWidget {
           margin: EdgeInsets.only( top: 30 ),
           width: double.infinity
         ),
+        padding: EdgeInsets.symmetric( horizontal: 30 ),
       ),
       top: true
     );
