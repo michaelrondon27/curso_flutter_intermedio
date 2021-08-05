@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'package:shoes_app/src/models/zapato_model.dart';
 import 'package:shoes_app/src/pages/zapato_desc_page.dart';
 
 class ZapatoSizePreview extends StatelessWidget {
@@ -120,30 +122,35 @@ class _TallaZapatoCaja extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        '${ numero.toString().replaceAll(".0", "") }',
-        style: TextStyle(
-          color: ( this.numero == 9 ) ? Colors.white : Color(0xffF1A23A),
-          fontSize: 16,
-          fontWeight: FontWeight.bold
+    final zapatoModel = Provider.of<ZapatoModel>(context);
+
+    return GestureDetector(
+      child: Container(
+        alignment: Alignment.center,
+        child: Text(
+          '${ numero.toString().replaceAll(".0", "") }',
+          style: TextStyle(
+            color: ( this.numero == zapatoModel.talla ) ? Colors.white : Color(0xffF1A23A),
+            fontSize: 16,
+            fontWeight: FontWeight.bold
+          ),
         ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular( 10 ),
+          boxShadow: [
+            if ( this.numero == zapatoModel.talla )
+              BoxShadow(
+                blurRadius: 10,
+                color: Color(0xffF1A23A),
+                offset: Offset(0, 5)
+              )
+          ],
+          color: ( this.numero == zapatoModel.talla ) ? Color(0xffF1A23A) : Colors.white
+        ),
+        height: 45,
+        width: 45,
       ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular( 10 ),
-        boxShadow: [
-          if ( this.numero == 9 )
-            BoxShadow(
-              blurRadius: 10,
-              color: Color(0xffF1A23A),
-              offset: Offset(0, 5)
-            )
-        ],
-        color: ( this.numero == 9 ) ? Color(0xffF1A23A) : Colors.white
-      ),
-      height: 45,
-      width: 45,
+      onTap: () => Provider.of<ZapatoModel>(context, listen: false).talla = this.numero,
     );
   }
 }
