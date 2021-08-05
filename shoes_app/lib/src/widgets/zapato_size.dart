@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shoes_app/src/pages/zapato_desc_page.dart';
+
 class ZapatoSizePreview extends StatelessWidget {
   final bool fullScreen;
 
@@ -8,34 +10,41 @@ class ZapatoSizePreview extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      child: Container(
-        child: Column(
-          children: [
-            _ZapatoConSombra(),
-
-            if ( !fullScreen )
-              _ZapatoTallas()
-          ]
+    return GestureDetector(
+      child: Padding(
+        child: Container(
+          child: Column(
+            children: [
+              _ZapatoConSombra(),
+    
+              if ( !fullScreen )
+                _ZapatoTallas()
+            ]
+          ),
+          decoration: BoxDecoration(
+            borderRadius: ( !fullScreen )
+              ? BorderRadius.circular( 50 )
+              : BorderRadius.only( 
+                bottomLeft: Radius.circular(50),
+                bottomRight: Radius.circular(50),
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+            color: Color(0xffFFCF53)
+          ),
+          height: ( fullScreen ) ? 410 : 430,
+          width: double.infinity,
         ),
-        decoration: BoxDecoration(
-          borderRadius: ( !fullScreen )
-            ? BorderRadius.circular( 50 )
-            : BorderRadius.only( 
-              bottomLeft: Radius.circular(50),
-              bottomRight: Radius.circular(50),
-              topLeft: Radius.circular(40),
-              topRight: Radius.circular(40),
-            ),
-          color: Color(0xffFFCF53)
-        ),
-        height: ( fullScreen ) ? 410 : 430,
-        width: double.infinity,
+        padding: EdgeInsets.symmetric(
+          horizontal: ( fullScreen ) ? 5 : 30,
+          vertical: ( fullScreen ) ? 0 : 5
+        )
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: ( fullScreen ) ? 5 : 30,
-        vertical: ( fullScreen ) ? 0 : 5
-      )
+      onTap: () {
+        if ( !this.fullScreen ) {
+          Navigator.push(context, MaterialPageRoute(builder: ( BuildContext context ) => ZapatoDescPage()));
+        }
+      },
     );
   }
 }
