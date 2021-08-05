@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:musicplayer/src/widgets/custom_appbar.dart';
 
@@ -10,9 +11,48 @@ class MusicPlayerPage extends StatelessWidget {
         children: [
           CustomAppBar(),
 
-          _ImagenDiscoDuration()
+          _ImagenDiscoDuration(),
+
+          _TituloPlay()
         ]
       )
+    );
+  }
+}
+
+class _TituloPlay extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [
+          Column(
+            children: [
+              Text(
+                'Reminder',
+                style: TextStyle( color: Colors.white.withOpacity( 0.8 ), fontSize: 30 )
+              ),
+
+              Text(
+                'The Weeknd',
+                style: TextStyle( color: Colors.white.withOpacity( 0.8 ), fontSize: 15 )
+              )
+            ]
+          ),
+
+          Spacer(),
+
+          FloatingActionButton(
+            backgroundColor: Color(0xffE90532),
+            child: Icon( FontAwesomeIcons.play ),
+            elevation: 0,
+            highlightElevation: 0,
+            onPressed: () {},
+          )
+        ]
+      ),
+      margin: EdgeInsets.only( top: 40 ),
+      padding: EdgeInsets.symmetric( horizontal: 50 )
     );
   }
 }
