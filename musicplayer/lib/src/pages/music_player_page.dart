@@ -1,8 +1,11 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:musicplayer/src/helpers/helpers.dart';
+import 'package:musicplayer/src/models/audioplayer_model.dart';
 import 'package:musicplayer/src/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
 
 class MusicPlayerPage extends StatelessWidget {
   @override
@@ -133,14 +136,20 @@ class __TituloPlayState extends State<_TituloPlay>  with SingleTickerProviderSta
             elevation: 0,
             highlightElevation: 0,
             onPressed: () {
+              final audioPlayerModel = Provider.of<AudioPlayerModel>(context, listen: false);
+
               if ( this.isPlaying ) {
                 playAnimation.reverse();
 
                 this.isPlaying = false;
+
+                audioPlayerModel.controller.stop();
               } else {
                 playAnimation.forward();
 
                 this.isPlaying = true;
+
+                audioPlayerModel.controller.repeat();
               }
             },
           )
@@ -222,23 +231,18 @@ class _BarraProgreso extends StatelessWidget {
 class _ImagenDisco extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final audioPlayerModel = Provider.of<AudioPlayerModel>(context);
+
     return Container(
       child: ClipRRect(
         borderRadius: BorderRadius.circular( 200 ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image(image: AssetImage('assets/starboy.jpg')),
-
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular( 100 ),
-                color: Color(0xffE90532)
-              ),
-              height: 10,
-              width: 10
-            )
-          ]
+        child: SpinPerfect(
+          animate: false,
+          child: Image(image: AssetImage('assets/starboy.jpg')),
+          controller: ( animationController ) => audioPlayerModel.controller = animationController,
+          duration: Duration( seconds: 10 ),
+          infinite: true,
+          manualTrigger: true
         )
       ),
       decoration: BoxDecoration(
