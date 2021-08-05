@@ -36,9 +36,17 @@ class Pagina1Page extends StatelessWidget {
         //   ).animate(curvedAnimation)
         // );
 
-        return ScaleTransition(
+        // return ScaleTransition(
+        //   child: child,
+        //   scale: Tween<double>(
+        //     begin: 0.0,
+        //     end: 1.0
+        //   ).animate(curvedAnimation)
+        // );
+
+        return RotationTransition(
           child: child,
-          scale: Tween<double>(
+          turns: Tween<double>(
             begin: 0.0,
             end: 1.0
           ).animate(curvedAnimation)
