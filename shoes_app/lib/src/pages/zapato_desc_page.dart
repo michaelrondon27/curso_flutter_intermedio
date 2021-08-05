@@ -21,13 +21,75 @@ class ZapatoDescPage extends StatelessWidget {
                     titulo: 'Nike Air Max 720'
                   ),
 
-                  _MontoBuyNow()
+                  _MontoBuyNow(),
+
+                  _ColoresYmas()
                 ]
               )
             )
           )
         ]
       )
+    );
+  }
+}
+
+class _ColoresYmas extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      child: Row(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned(
+                  child: _BotonColor( Color(0xffC6D642) ),
+                  left: 90
+                ),
+
+                Positioned(
+                  child: _BotonColor( Color(0xffFFAD29) ),
+                  left: 60
+                ),
+                
+                Positioned(
+                  child: _BotonColor( Color(0xff2099F1) ),
+                  left: 30
+                ),
+                
+                _BotonColor( Color(0xff364D56) ),
+              ]
+            )
+          ),
+
+          BotonNaranja(
+            alto: 30,
+            ancho: 170,
+            color: Color(0xffFFC675),
+            texto: 'More related items'
+          )
+        ]
+      ),
+      padding: EdgeInsets.symmetric( horizontal: 30 )
+    );
+  }
+}
+
+class _BotonColor extends StatelessWidget {
+  final Color color;
+
+  _BotonColor( this.color );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle
+      ),
+      height: 45,
+      width: 45
     );
   }
 }
