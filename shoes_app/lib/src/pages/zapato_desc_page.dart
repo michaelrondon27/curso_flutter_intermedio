@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'package:shoes_app/src/models/zapato_model.dart';
 import 'package:shoes_app/src/widgets/custom_widgets.dart';
 
 class ZapatoDescPage extends StatelessWidget {
@@ -112,21 +114,21 @@ class _ColoresYmas extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                  child: _BotonColor( Color(0xffC6D642), 4 ),
+                  child: _BotonColor( Color(0xffC6D642), 4 , 'assets/imgs/verde.png'),
                   left: 90
                 ),
 
                 Positioned(
-                  child: _BotonColor( Color(0xffFFAD29), 3 ),
+                  child: _BotonColor( Color(0xffFFAD29), 3, 'assets/imgs/amarillo.png' ),
                   left: 60
                 ),
                 
                 Positioned(
-                  child: _BotonColor( Color(0xff2099F1), 2 ),
+                  child: _BotonColor( Color(0xff2099F1), 2, 'assets/imgs/azul.png' ),
                   left: 30
                 ),
                 
-                _BotonColor( Color(0xff364D56), 1 ),
+                _BotonColor( Color(0xff364D56), 1, 'assets/imgs/negro.png' ),
               ]
             )
           ),
@@ -147,19 +149,23 @@ class _ColoresYmas extends StatelessWidget {
 class _BotonColor extends StatelessWidget {
   final Color color;
   final int index;
+  final String urlImagen;
 
-  _BotonColor( this.color, this.index );
+  _BotonColor( this.color, this.index, this.urlImagen );
 
   @override
   Widget build(BuildContext context) {
     return FadeInLeft(
-      child: Container(
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle
+      child: GestureDetector(
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle
+          ),
+          height: 45,
+          width: 45
         ),
-        height: 45,
-        width: 45
+        onTap: () => Provider.of<ZapatoModel>(context, listen: false).assetImage = this.urlImagen,
       ),
       delay: Duration( milliseconds: this.index * 100 ),
       duration: Duration( milliseconds: 300 ),

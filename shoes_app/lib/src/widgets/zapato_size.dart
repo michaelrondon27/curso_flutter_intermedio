@@ -54,6 +54,8 @@ class ZapatoSizePreview extends StatelessWidget {
 class _ZapatoConSombra extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final zapatoModel = Provider.of<ZapatoModel>(context);
+
     return Padding(
       child: Stack(
         children: [
@@ -63,7 +65,7 @@ class _ZapatoConSombra extends StatelessWidget {
             right: 0,
           ),
 
-          Image(image: AssetImage('assets/imgs/azul.png'))
+          Image(image: AssetImage( zapatoModel.assetImage ))
         ]
       ),
       padding: EdgeInsets.all( 50 ),
