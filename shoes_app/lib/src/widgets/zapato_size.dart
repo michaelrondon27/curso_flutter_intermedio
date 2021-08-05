@@ -100,7 +100,7 @@ class _TallaZapatoCaja extends StatelessWidget {
       child: Text(
         '${ numero.toString().replaceAll(".0", "") }',
         style: TextStyle(
-          color: Color(0xffF1A23A),
+          color: ( this.numero == 9 ) ? Colors.white : Color(0xffF1A23A),
           fontSize: 16,
           fontWeight: FontWeight.bold
         ),
@@ -108,9 +108,14 @@ class _TallaZapatoCaja extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular( 10 ),
         boxShadow: [
-          // BoxShadow()
+          if ( this.numero == 9 )
+            BoxShadow(
+              blurRadius: 10,
+              color: Color(0xffF1A23A),
+              offset: Offset(0, 5)
+            )
         ],
-        color: Colors.white
+        color: ( this.numero == 9 ) ? Color(0xffF1A23A) : Colors.white
       ),
       height: 45,
       width: 45,
