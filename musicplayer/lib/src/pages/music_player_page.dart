@@ -23,7 +23,61 @@ class _ImagenDiscoDuration extends StatelessWidget {
     return Container(
       child: Row(
         children: [
-          _ImagenDisco()
+          _ImagenDisco(),
+
+          SizedBox( width: 30 ),
+
+          _BarraProgreso(),
+
+          SizedBox( width: 20 ),
+        ]
+      ),
+      margin: EdgeInsets.only( top: 70 ),
+      padding: EdgeInsets.symmetric( horizontal: 20 ),
+    );
+  }
+}
+
+class _BarraProgreso extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final estilo = TextStyle( color: Colors.white.withOpacity( 0.4 ));
+
+    return Container(
+      child: Column(
+        children: [
+          Text(
+            '00:00',
+            style: estilo,
+          ),
+
+          SizedBox( height: 10 ),
+
+          Stack(
+            children: [
+              Container(
+                color: Colors.white.withOpacity( 0.1 ),
+                height: 230,
+                width: 3
+              ),
+
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  color: Colors.white.withOpacity( 0.8 ),
+                  height: 100,
+                  width: 3
+                ),
+              )
+            ]
+          ),
+
+          SizedBox( height: 10 ),
+
+          Text(
+            '00:00',
+            style: estilo,
+          )
         ]
       )
     );
@@ -39,15 +93,15 @@ class _ImagenDisco extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image(image: AssetImage('assets/no-guidance.jpg')),
+            Image(image: AssetImage('assets/starboy.jpg')),
 
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular( 100 ),
-                color: Color(0xff997FED)
+                color: Color(0xffE90532)
               ),
-              height: 25,
-              width: 25
+              height: 10,
+              width: 10
             )
           ]
         )
@@ -57,8 +111,8 @@ class _ImagenDisco extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           colors: [
-            Color(0xff997FED),
-            Color(0xff3621BA)
+            Color(0xff060D3C),
+            Color(0xffE90532)
           ]
         )
       ),
