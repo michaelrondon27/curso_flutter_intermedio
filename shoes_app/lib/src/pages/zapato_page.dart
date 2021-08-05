@@ -28,6 +28,10 @@ class ZapatoPage extends StatelessWidget {
               ),
               physics: BouncingScrollPhysics()
             )
+          ),
+
+          AgregarCarritoBoton(
+            monto: 180.0
           )
         ],
       ),
