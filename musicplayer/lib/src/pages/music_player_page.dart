@@ -208,7 +208,7 @@ class _BarraProgreso extends StatelessWidget {
               Positioned(
                 bottom: 0,
                 child: Container(
-                  color: Colors.white.withOpacity( 0.8 ),
+                  color: Color(0xffE90532),
                   height: 100,
                   width: 3
                 ),
